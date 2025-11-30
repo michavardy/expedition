@@ -1,0 +1,25 @@
+{
+  "name": "whatsapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^7.0.0-rc.9",
+    "cors": "^2.8.5",
+    "qrcode": "^1.5.4"
+  },
+  "scripts": {
+    "dev": "node --loader ts-node/esm src/server.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/ws": "^8.18.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "ws": "^8.18.3"
+  }
+}

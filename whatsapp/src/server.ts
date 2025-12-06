@@ -1,19 +1,39 @@
 import { WebSocketServer } from "ws";
+import { WhatsAppClient } from "./waClient.ts";
 
-const wss = new WebSocketServer({ port: 3001, host: "0.0.0.0" });
+function extractId(url?: string | null): string {
+  if (!url) {
+    throw new Error("Missing URL");
+  }
 
-wss.on("listening", () => {
-  console.log("WebSocket server is listening on ws://0.0.0.0:3001");
-});
+  // Should begin with "/qr_code/"
+  const parts = url.split("/"); // ["", "qr_code", "<id>"]
 
-wss.on("connection", (ws) => {
-  console.log("Client connected!");
-  ws.send("hello world");
-  ws.on("message", (msg) => {
-    console.log("Received message from client:", msg.toString());
+  if (parts.length !== 3) {
+    throw new Error(`Invalid URL format: ${url}`);
+  }
+
+  const [, prefix, id] = parts;
+
+  if (prefix !== "qr_code") {
+    throw new Error(`Invalid prefix '${prefix}', expected 'qr_code'`);
+  }
+
+  if (!id || id.trim() === "") {
+    throw new Error("Missing ID in URL");
+  }
+
+  return id;
+}
+
+async function main() {
+  const wss = new WebSocketServer({ port: 3001 })
+  wss.on("connection", (ws, request) => {
+  const id: string = extractId(request.url);
+  console.log("New WS connection with id:", id);
+  const whatsAppClient = new WhatsAppClient(ws, id);
   });
-});
 
-wss.on("error", (err) => {
-  console.error("WebSocket server error:", err);
-});
+}
+
+main()

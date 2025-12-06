@@ -1,11 +1,8 @@
 
-import WebSocketClient from "./WebSocketClient";
-
 export default function Page() {
   return (
     <div>
-      <h1>Iyar is the best</h1>
-      <WebSocketClient />
+      <h1>Home Page</h1>
     </div>
   );
 }

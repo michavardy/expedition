@@ -8,18 +8,34 @@
   "description": "",
   "type": "module",
   "dependencies": {
+    "@prisma/client": "^7.1.0",
     "@whiskeysockets/baileys": "^7.0.0-rc.9",
+    "better-sqlite3": "^12.5.0",
     "cors": "^2.8.5",
-    "qrcode": "^1.5.4"
+    "express": "^5.2.1",
+    "express-oas-generator": "^1.0.48",
+    "qrcode": "^1.5.4",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "scripts": {
-    "dev": "node --loader ts-node/esm src/server.ts"
+    "dev": "node --loader ts-node/esm src/server.ts",
+    "api": "node --loader ts-node/esm src/api.ts",
+    "restart": "node --loader ts-node/esm scripts/restart_all_clients.ts",
+    "test": "vitest run"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
     "@types/node": "^24.10.1",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
     "@types/ws": "^8.18.1",
+    "prisma": "^7.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
+    "vitest": "^4.0.15",
     "ws": "^8.18.3"
   }
 }
